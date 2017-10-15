@@ -4,6 +4,8 @@
     {
         public static int BinarySearch(this int[] array, int element)
         {
+            int step = 0;
+
             if (element < array[0] || element > array[array.Length - 1]) return -1;
 
             int start = 0;
@@ -12,6 +14,7 @@
 
             while (start < finish)
             {
+                step++;
                 middle = (start + finish) / 2;
 
                 if (element == array[middle])
@@ -27,16 +30,21 @@
                     start = middle + 1;
                 }
             }
-            return (array[finish] == element) ? finish : -1;
+            //return (array[finish] == element) ? finish : -1;
+            return (array[finish] == element) ? step : -1;
         }
 
         public static int InterpolationSearch(this int[] array, int element)
         {
+            int step = 0;
+
             int left = 0;
             int right = array.Length - 1;
 
             while (array[left] < element && element < array[right])
             {
+                step++;
+
                 int middle = left + (element - array[left]) * (right - left) / (array[right] - array[left]);
                 if (array[middle] < element)
                 {
@@ -52,18 +60,20 @@
                 }
             }
 
-            if (array[left] == element)
-            {
-                return left;
-            }
-            else if (array[right] == element)
-            {
-                return right;
-            }
-            else
-            {
-                return -1;
-            }
+            //if (array[left] == element)
+            //{
+            //    return left;
+            //}
+            //else if (array[right] == element)
+            //{
+            //    return right;
+            //}
+            //else
+            //{
+            //    return -1;
+            //}
+
+            return (array[left] == element || array[right] == element) ? step : -1;
         }
 
     }

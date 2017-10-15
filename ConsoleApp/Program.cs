@@ -28,7 +28,7 @@ namespace ConsoleApp
 
             #region Searches
             Random rand = new Random();
-            string path = @"d:\university\3 course\algorithms\Algorithms.Lab2\Logic\Search\arrays.txt";
+            string path = Directory.GetCurrentDirectory() + @"\..\..\..\Logic\Search\arrays.txt";
 
             int[] a1 = new int[100_000];
             int myBirth = 15_552;// 4 * 6 * 9 * 9 * 8;
