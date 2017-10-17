@@ -11,11 +11,16 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             #region BST
-            //BinarySearchTree<int> tree = new BinarySearchTree<int>(new int[] { 20,10,25,2,12,21,40,1,9,18,36 });
-            ////tree.RotateLeft(20);
-            ////tree.RotateLeft(10);
-            ////tree.RotateRight(20);
-            //tree.RotateRight(10);
+            //BinarySearchTree<int> tree = new BinarySearchTree<int>(new int[] { 20, 10, 25, 2, 12, 21, 40, 1, 9, 18, 36 });
+
+            //tree.PrintByLevels();
+            //Console.WriteLine();
+            //Console.WriteLine();
+
+            ////tree.RotationLeft(20);
+            //tree.RotationLeft(25);
+            ////tree.RotationRight(20);
+            ////tree.RotationRight(10);
 
             //tree.PrintByLevels();
 
@@ -25,6 +30,8 @@ namespace ConsoleApp
             ////}
 
             #endregion
+
+            //Console.Write("\n\n\n");
 
             #region Searches
             Random rand = new Random();
@@ -37,7 +44,7 @@ namespace ConsoleApp
             //{
             //    for (int i = 0; i < a1.Length * 50; i++)
             //    {
-            //        int randInt = rand.Next(0, 400_000);
+            //        int randInt = rand.Next(0, 800_000);
             //        writer.Write(randInt);
             //    }
             //}
@@ -56,6 +63,7 @@ namespace ConsoleApp
                     Console.Write(String.Format($"{numberArr,6} {a1.BinarySearch(myBirth),8} {a1.InterpolationSearch(myBirth),8} \n"));
 
                     numberArr++;
+                    
                 }
             }
             #endregion
