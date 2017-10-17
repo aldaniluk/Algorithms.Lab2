@@ -230,27 +230,13 @@ namespace Logic
         #endregion
 
         #region Rotations
-        public void RotateLeft(T value)
+        public void RotationLeft(T value)
         {
-            Node<T> current = root;
-            Node<T> x = null;
-            int result;
-
-            while (current != null)
-            {
-                result = comparison.Invoke(current.Value, value);
-                if (result == 0)
-                {
-                    x = current;
-                    break;
-                }
-                else if (result > 0)
-                    current = current.Left;
-                else
-                    current = current.Right;
-            }
+            Node<T> x = Find(value);
+            if (Find(value).Left == null && Find(value).Right == null) return;
 
             Node<T> y = x.Right;
+
             x.Right = y.Left;
 
             if (y.Left != null)
@@ -277,25 +263,10 @@ namespace Logic
             x.Parent = y;
         }
 
-        public void RotateRight(T value)
+        public void RotationRight(T value)
         {
-            Node<T> current = root;
-            Node<T> x = null;
-            int result;
-
-            while (current != null)
-            {
-                result = comparison.Invoke(current.Value, value);
-                if (result == 0)
-                {
-                    x = current;
-                    break;
-                }
-                else if (result > 0)
-                    current = current.Left;
-                else
-                    current = current.Right;
-            }
+            Node<T> x = Find(value);
+            if (Find(value).Left == null && Find(value).Right == null) return;
 
             Node<T> y = x.Left;
             x.Left = y.Right;
