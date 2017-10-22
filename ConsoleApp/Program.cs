@@ -68,9 +68,9 @@ namespace ConsoleApp
             #endregion
 
             #region Hashtable
-            Hashtable<int> table = new Hashtable<int>();
+            Hashtable<int> table = new Hashtable<int>(97);
 
-            Random rand = new Random();
+            //Random rand = new Random();
             string path = Directory.GetCurrentDirectory() + @"\..\..\..\Logic\Hashtable\ints.txt";
 
             //using (BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.OpenOrCreate)))
@@ -82,7 +82,7 @@ namespace ConsoleApp
             //    }
             //}
 
-            
+
 
             using (BinaryReader reader = new BinaryReader(File.Open(path, FileMode.Open), Encoding.ASCII))
             {
@@ -92,9 +92,13 @@ namespace ConsoleApp
                 }
             }
 
-            Console.WriteLine(table);
-            
-                
+            Console.WriteLine(table); 
+
+            Console.WriteLine(table.Contains(976632844)); //true
+            Console.WriteLine(table.Contains(976632845)); //false
+            table.Remove(976632844);
+            Console.WriteLine(table.Contains(976632844)); //false
+
             #endregion;
         }
     }

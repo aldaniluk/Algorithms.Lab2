@@ -6,51 +6,50 @@ namespace Logic.Hashtable
 {
     public class Hashtable<T> 
     {
-        private Dictionary<int, List<T>> table;
+        private int size;
+        private List<T>[] table;
 
-        public Hashtable()
+        public Hashtable(int size)
         {
-            table = new Dictionary<int, List<T>>();
+            table = new List<T>[size];
+            this.size = size;
         }
 
         public void Add(T element)
         {
             int hashCode = GetHashCodeForElement(element); 
-            if(table.ContainsKey(hashCode)) 
-            {
-                if(table[hashCode].Contains(element)) 
-                {
-                    return;
-                }
 
-                table[hashCode].Add(element);  
-            }
-            else
+            if(table[hashCode] == null) 
             {
-                table.Add(hashCode, new List<T> { element }); 
+                table[hashCode] = new List<T>();
             }
+
+            table[hashCode].Add(element);  
         }
 
         public void Remove(T element)
         {
-            List<T> values;
             int hashCode = GetHashCodeForElement(element);
-            if (!table.TryGetValue(hashCode, out values))
+            List<T> values = table[hashCode];
+
+            if (values == null)
+            {
+                return;
+            }
+            if (!values.Contains(element))
             {
                 return;
             }
 
             values.Remove(element);
-            if(values.Count == 0)
-            {
-                table.Remove(hashCode);
-            }
         }
 
-        public bool Contains(T element) 
+        public bool Contains(T element)
         {
-            List<T> values;
-            if (!table.TryGetValue(GetHashCodeForElement(element), out values))
+            int hashCode = GetHashCodeForElement(element);
+            List<T> values = table[hashCode];
+
+            if (values == null)
             {
                 return false;
             }
@@ -61,15 +60,16 @@ namespace Logic.Hashtable
         public override string ToString()
         {
             StringBuilder result = new StringBuilder();
-            for(int i = 0; i < table.Keys.Count; i++)
+            for (int i = 0; i < table.Length; i++)
             {
-                List<T> values;
-                if(!table.TryGetValue(i, out values))
+                if (table[i] == null)
                 {
                     continue;
                 }
+
                 result.Append(i + " : ");
-                foreach(var value in values)
+
+                foreach (var value in table[i])
                 {
                     result.Append(value.ToString() + ' ');
                 }
@@ -82,7 +82,7 @@ namespace Logic.Hashtable
 
         private int GetHashCodeForElement(T element)
         {
-            return element.GetHashCode() % 97;
+            return element.GetHashCode() % size;
         }
 
     }
